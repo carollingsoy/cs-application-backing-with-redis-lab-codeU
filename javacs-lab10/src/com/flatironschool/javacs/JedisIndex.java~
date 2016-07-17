@@ -67,8 +67,8 @@ public class JedisIndex {
 	 * @return Set of URLs.
 	 */
 	public Set<String> getURLs(String term) {
-        	// TODO: FILL THIS IN!
-                return jedis.smembers(urlSetKey(term));
+        // FILL THIS IN!
+		return null;
 	}
 
     /**
@@ -78,13 +78,8 @@ public class JedisIndex {
 	 * @return Map from URL to count.
 	 */
 	public Map<String, Integer> getCounts(String term) {
-        	// TODO: FILL THIS IN!
-                Map<String, Integer> map = new HashMap<String, Integer>();
-                Set<String> urls = getURLs(term);
-                for (String url : urls) {
-                    map.put(url, getCount(url, term));
-                }
-		return map;
+        // FILL THIS IN!
+		return null;
 	}
 
     /**
@@ -95,9 +90,8 @@ public class JedisIndex {
 	 * @return
 	 */
 	public Integer getCount(String url, String term) {
-        	// TODO: FILL THIS IN!
-                String redis_url = termCounterKey(url);
-		return Integer.parseInt(jedis.hget(redis_url, term));
+        // FILL THIS IN!
+		return null;
 	}
 
 
@@ -108,41 +102,8 @@ public class JedisIndex {
 	 * @param paragraphs  Collection of elements that should be indexed.
 	 */
 	public void indexPage(String url, Elements paragraphs) {
-        	// TODO: FILL THIS IN!
-                TermCounter tc = new TermCounter(url);
-                tc.processElements(paragraphs);
-                addTermCounter(tc);
-        }
-
-
-        /**
-         * Adds a URL to the set associate with 'term'.
-         *
-         */
-        public void add(String term, TermCounter tc) {
-            // TODO
-            jedis.sadd(urlSetKey(term), tc.getLabel());
-        }
-
-        /**
-         * Pushes the contents of the TermCounter to Redis.
-         *
-         */
-        public List<Object> addTermCounter(TermCounter tc) {
-            // TODO
-            Transaction t = jedis.multi();
-            String url = tc.getLabel();
-            String redis_url = termCounterKey(url);
-            t.del(redis_url);
-
-            for (String term : tc.keySet()) {
-                String count = tc.get(term).toString();
-                t.hset(redis_url, term, count);
-                t.sadd(urlSetKey(term), url);
-            }
-            return t.exec();
-        }
-
+        // FILL THIS IN!
+	}
 
 	/**
 	 * Prints the contents of the index.
